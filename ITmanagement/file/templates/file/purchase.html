@@ -1,0 +1,57 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>GDPA IT Purchase</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Purchase ID</th>
+                <th>Date of Purchase</th>
+                <th>Vendor</th>
+                <th>Item</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Capacity</th>
+                <th>Version</th>
+                <th>Item Serial No</th>
+                <th>Price</th>
+                <th>Warranty Period</th>
+                <th>Req_id</th>
+                <th>Qty</th>
+                <th>Recieving</th>
+                <th>status</th>
+            </tr>
+            {% for i in data %}
+
+                {% if i.purchase_qty != 0 %}
+            <tr>
+                <form action="{% url 'receiving-form' i.purchase_id %}" method="post">
+                    {% csrf_token %}
+                    <td><input type="submit" value="{{i.purchase_id}}"></td>
+                </form>
+                <td>{{i.date_of_purchase}}</td>
+                <td>{{i.Vendor}}</td>
+                <td>{{i.req.item}}</td>
+                <td>{{i.brand}}</td>
+                <td>{{i.item_model}}</td>
+                <td>{{i.req.capacity}}</td>
+                <td>{{i.req.version}}</td>
+                <td>{{i.item_serial_number}}</td>
+                <td>{{i.price}}</td>
+                <td>{{i.warranty_period}}</td>
+                <td>{{i.req.req_number}}</td>
+                <td>{{i.purchase_qty}}</td>
+                <td>{{i.rec_status}}</td>
+                <td>{{i.older_than_ten_days}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+        </table>
+
+{% endblock content %}

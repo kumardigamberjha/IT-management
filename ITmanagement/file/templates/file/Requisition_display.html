@@ -1,0 +1,138 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>User Status</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+    table{
+        width: 98%;
+        margin: 15px auto;
+    }
+    table tr th{
+        font-size: 1.3rem;
+    }
+    h1{
+              color: blue;
+              text-align: center;
+              margin: 25px 35px;
+              font-weight: 800;
+    }
+    a{
+        color: none;
+        text-decoration: none;
+    }
+    table tr td form input{
+              border: none;
+              background-color: none;
+              color: blue;
+              text-decoration:underline;
+    }
+    .even-color{
+        color: blue;
+    }
+    .qty-2-color{
+        color: red;
+    }
+    .else-color{
+        color: orange;
+    }
+    .btn{
+        color: blue;
+        font-size: 1.3rem;
+        border: 1px solid rgb(52, 190, 10);
+        text-decoration: none;
+        
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <h1>User Requisitions</h1>
+    <div class="table-responsive">
+        <table class="table">
+
+        <tr>
+            <th>Req No.</th>
+            <th>Req_Date</th>
+            <th>User</th>
+            <th>Depatment</th>
+            <th>Item</th>
+            <th>Capacity</th>
+            <th>Version</th>
+            <th>Qty</th>
+            <th>Status</th>
+        </tr>
+
+
+    {% for i in data %}
+
+        {% if i.qty != 0 %}
+            {% if i.qty == 1 %}
+            
+        <tr>
+            <td><form action="{% url 'IT-form' i.req_number %}" method="post">
+                {% csrf_token %}
+                <input  class="btn" type="submit" value="{{i.req_number}}">
+            </form></td>
+            <td class="even-color">{{i.req_Date}}</td>
+            <td class="even-color">{{i.user}}</td>
+            <td class="even-color">{{i.department}}</td>
+            <td class="even-color">{{i.item}}</td>
+            <td class="even-color">{{i.capacity}}</td>
+            <td class="even-color">{{i.version}}</td>
+            <td class="even-color">{{i.qty}}</td>
+            <td class="even-color">{{i.status}}</td>
+        </tr>
+        {% endif %}
+
+        {% if i.qty == 2 %}
+            
+        <tr>
+            <td><form action="{% url 'IT-form' i.req_number %}" method="post">
+                {% csrf_token %}
+                <input class="btn" type="submit" value="{{i.req_number}}">
+            </form></td>
+            <td class="qty-2-color">{{i.req_Date}}</td>
+            <td class="qty-2-color">{{i.user}}</td>
+            <td class="qty-2-color">{{i.department}}</td>
+            <td class="qty-2-color">{{i.item}}</td>
+            <td class="qty-2-color">{{i.capacity}}</td>
+            <td class="qty-2-color">{{i.version}}</td>
+            <td class="qty-2-color">{{i.qty}}</td>
+            <td class="qty-2-color">{{i.status}}</td>
+        </tr>
+        {% endif %}
+
+        {% if i.qty != 0 and i.qty != 1 and i.qty != 2 %}
+            
+        <tr>
+            <td><form action="{% url 'IT-form' i.req_number %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="{{i.req_number}}">
+            </form></td>
+            <td class="else-color">{{i.req_Date}}</td>
+            <td class="else-color">{{i.user}}</td>
+            <td class="else-color">{{i.department}}</td>
+            <td class="else-color">{{i.item}}</td>
+            <td class="else-color">{{i.capacity}}</td>
+            <td class="else-color">{{i.version}}</td>
+            <td class="else-color">{{i.qty}}</td>
+            <td class="else-color">{{i.status}}</td>
+        </tr>
+        {% endif %}
+        {% endif %}
+
+    {% endfor %}
+    
+
+</table>
+
+{% endblock content %}
+<!-- <td><form action="{% url 'update-user-requisition-form' i.req_number %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="{{i.req_number}}">
+</form></td> -->

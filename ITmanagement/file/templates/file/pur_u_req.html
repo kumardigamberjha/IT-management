@@ -1,0 +1,104 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>User Status</title>
+{% endblock title %}
+
+{% load crispy_forms_tags %}
+
+
+{% block style %}
+<style>
+    .col-md-8,
+    .col-md-3 {
+        padding: 15px;
+    }
+
+    .col-md-8 input {
+        padding: 5px;
+        width: 100%;
+        border-bottom: 1px solid blue;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+    }
+
+    h1 {
+        color: blue;
+        text-align: center;
+        margin: 25px 35px;
+        font-weight: 800;
+    }
+    #submit{
+              width: 100%;
+              color: white;
+              background-color: blue;
+              margin: 20px auto;
+              border-radius: 33px;
+              outline: none;
+              padding: 8px;
+          }
+          select{
+              border: none;
+              border: 1px solid blue;
+              padding: 5px 35px;
+              border-radius: 33px;
+          }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <h1>IT Purchase Form</h1>
+        <div class="row">
+            <div class="col-md-3">
+                User
+            </div>
+            <div class="col-md-8">
+                <input type="text" value="{{data.user.first_name}}">
+
+            </div>
+            <div class="col-md-3">
+                Select Item
+            </div>
+            <div class="col-md-8">
+                <input type="text" value="{{data.item.name}}">
+            </div>
+            
+            <div class="col-md-3">
+                Select Item Capacity
+            </div>
+            <div class="col-md-8">
+                <input type="text" value="{{data.capacity}}">
+            </div>
+            
+            <div class="col-md-3">
+                Select Version
+            </div>
+            <div class="col-md-8">
+                <input type="text" value="{{data.version}}">
+            </div>
+            
+            <div class="col-md-3">
+                Qty
+            </div>
+            <div class="col-md-8">
+                <input type="text" value="{{data.qty}}">    
+            </div>
+            
+            <div class="col-md-3">
+                Status
+            </div>
+            <div class="col-md-8">
+                {{form.r_status}}
+            </div>
+
+            <input type="submit" value="Submit" id="submit">
+        </div>
+    </form>
+</div>
+{% endblock content %}

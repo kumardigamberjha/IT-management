@@ -1,0 +1,58 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>GDPA IT Purchase</title>
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table">
+
+        <tr>
+            <th>Req No</th>
+            <th>PO</th>
+            <th>Item</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Capacity</th>
+            <th>Version</th>
+            <th>Vendor</th>
+            <th>Serial Number</th>
+            <th>Warranty Period</th>
+            <th>Location</th>
+            <th>Qty</th>
+            <th>Bill No</th>
+            <th>Issue Status</th>
+        </tr>
+        
+        {% for i in data %}
+            {% if i.pur.rec_qty != 0 %}
+        <tr>
+            <form action="{% url 'purchase_issue_form' i.pur.purchase_id %}" method="post">
+                {% csrf_token %}
+                <td><input type="submit" value="{{i.pur.req.req_number}}"></td>
+        </form>
+            <td>{{i.pur.purchase_id}}</td>
+            <td>{{i.pur.req.item}}</td>
+            <td>{{i.pur.brand}}</td>
+            <td>{{i.pur.item_model}}</td>
+            <td>{{i.pur.req.capacity}}</td>
+            <td>{{i.pur.req.version}}</td>
+            <td>{{i.pur.Vendor}}</td>
+            <td>{{i.pur.item_serial_number}}</td>
+            <td>{{i.pur.warranty_period}}</td>
+            <td>{{i.pur.item_location}}</td>
+            <td>{{i.pur.rec_qty}}</td>
+            <td>{{i.Bill_No}}</td>
+            <td>{{i.pur.issue_status}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock content %}

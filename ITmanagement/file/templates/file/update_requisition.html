@@ -1,0 +1,25 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>User Status</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+   
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <h1>User Requisitions</h1>
+    <div class="table-responsive">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form}}
+        </form>
+
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,244 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>Purchase Form</title>
+{% endblock title %}
+
+{% load widget_tweaks %}
+{% block content %}
+
+{% block style %}
+<style>
+    #submit {
+        width: 100%;
+        color: white;
+        background-color: blue;
+        margin: 20px auto;
+        border-radius: 33px;
+        outline: none;
+        padding: 8px;
+    }
+
+    h1 {
+        color: blue;
+        text-align: center;
+        margin: 25px 35px;
+        font-weight: 800;
+    }
+
+    .container .form form {
+        width: 100%;
+        margin: 10px 250px;
+    }
+
+    .container .form form .col-md-3,
+    .col-md-8 {
+        padding: 15px;
+    }
+
+    .ui-menu-item-wrapper {
+        position: relative;
+        display: block;
+        width: 75%;
+        color: black;
+        background-color: skyblue;
+        margin-left: -35px;
+        padding: 10px;
+        background-size: 100% 100vh;
+    }
+
+    .border-widths {
+        width: 100%;
+    }
+
+    .border-btm {
+        border-bottom: 1px solid blue;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+        outline-offset: none;
+        color: blue;
+    }
+
+    .border-btm:hover,
+    .border-btm:focus {
+        outline-width: 0;
+        outline: none;
+        outline-offset: none;
+        outline-style: none;
+    }
+
+    .container-fluids {
+        width: 85%;
+        margin: 15px auto;
+    }
+</style>
+{% endblock style %}
+
+<div class="container-fluids">
+    <h1>IT Purchase Form</h1>
+    <div class="form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3 row">
+                <label for="r-no" class="col-sm-2 col-form-label">Req Number</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="req"
+                        value="{{data.req_number}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="r-date" class="col-sm-2 col-form-label">Req Number</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="req-date"
+                        value="{{data.req_Date}}">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="item" class="col-sm-2 col-form-label">Item</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="item" value="{{data.item}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="capacity" class="col-sm-2 col-form-label">Item Capacity</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" id="capacity" value="{{data.capacity}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="version" class="col-sm-2 col-form-label">Version</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" id="version" value="{{data.version}}">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="qty" class="col-sm-2 col-form-label">Req Qty</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" id="qty" value="{{data.qty}}"
+                        name="qty1">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="brand" class="col-sm-2 col-form-label">Brand</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="brand" id="brand" required>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="item_model" class="col-sm-2 col-form-label">Item Model</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="item_model" id="item_model">
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="serial_number" class="col-sm-2 col-form-label">Serial Number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="item_serial_number" id="serial_number"
+                        required>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="vendor" class="col-sm-2 col-form-label">Vendor</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="Vendor" id="vendor" required>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="price" class="col-sm-2 col-form-label">Item Price</label>
+                <div class="col-sm-10">
+                    <input type="number" class="border-btm border-widths" name="price" id="price" required>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="w_period" class="col-sm-2 col-form-label">Warranty Period</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="warranty_period" id="w_period" required>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="location" class="col-sm-2 col-form-label">Item Location</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="item_location" id="location" required>
+                </div>
+            </div>
+
+
+            <div class="mb-3 row">
+                <label for="purchase_qty" class="col-sm-2 col-form-label">Purchase Qty</label>
+                <div class="col-sm-10">
+                    <input type="text" class="border-btm border-widths" name="purchase_qty" id="purchase_qty" required>
+                </div>
+            </div>
+    </div>
+    <input type="submit" id="submit">
+    </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+<!-- jquery ui -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script>
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in brand %}
+              "{{i.name}}",
+        {% endfor %}
+      ])];
+    $("#brand").autocomplete({
+        source: availableTags
+    });
+    } );
+
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in vendor %}
+              "{{i.name}}",
+        {% endfor %}
+      ])];
+    $("#vendor").autocomplete({
+        source: availableTags
+    });
+    } );
+
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in location %}
+              "{{i.name}}",
+        {% endfor %}
+      ])];
+    $("#location").autocomplete({
+        source: availableTags
+    });
+    } );
+
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in w_period %}
+              "{{i.status}}",
+        {% endfor %}
+      ])];
+    $("#w_period").autocomplete({
+        source: availableTags
+    });
+    } );
+
+</script>
+{% endblock content %}

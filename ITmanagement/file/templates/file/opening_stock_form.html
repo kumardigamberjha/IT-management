@@ -1,0 +1,165 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>GDPA IT Purchase</title>
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+
+{% block style %}
+<style>
+    .container {
+        margin: 0 auto;
+    }
+
+    .items-brand label {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .items-brand {
+        width: 100%;
+    }
+
+    .items-brand select,
+    input {
+        border: 1px solid blue;
+        padding: 5px;
+        width: 100%;
+        border-radius: 55px;
+        outline: none;
+    }
+
+    #submit {
+        color: white;
+        width: 100%;
+        color: white;
+        background-color: blue;
+        margin: 20px auto;
+        padding: 8px;
+    }
+
+    h1 {
+        color: blue;
+        text-align: center;
+        margin: 25px 35px;
+        font-weight: 800;
+    }
+    #options{
+        display: hidden;
+    }
+    .ui-menu-item-wrapper{
+            position: relative;
+            display: block;
+            width: 85%;
+            color: black;
+            background-color: skyblue;
+            margin-left: -35px;
+            padding: 10px;
+            background-size: 100%  100vh;
+          }
+
+</style>
+{% endblock style %}
+
+{% block content %}
+<h1>Opening Stock Form</h1>
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="container">
+                <div class="mb-3">
+                    <label for="items" class="form-label">Item</label>
+                    <input type="text" name="item" class="form-control" id="items" placeholder="Monitor">
+                </div>
+                <div class="mb-3">
+                    <label for="brand" class="form-label">Brand</label>
+                    <input type="text" name="brand" class="form-control" id="brand" placeholder="Dell">
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" name="item_model" class="form-control" id="model" placeholder="abc">
+                </div>
+                <div class="mb-3">
+                    <label for="vendor" class="form-label">Vendor</label>
+                    <input type="text" name="Vendor" class="form-control" id="vendor" placeholder="abc">
+                </div>
+                <div class="mb-3">
+                    <label for="capacity" class="form-label">Capacity</label>
+                    <input type="text" name="capacity" class="form-control" id="capacity" placeholder="2m wire">
+                </div>
+                <div class="mb-3">
+                    <label for="version" class="form-label">Version</label>
+                    <input type="text" class="form-control" id="version" name="version" placeholder="">
+                </div>
+                <div class="mb-3">
+                    <label for="item_location" class="form-label">Item Location</label>
+                    <input type="text" name="item_location" class="form-control" id="item_location" placeholder="U2">
+                </div>
+                <p id="options"></p>
+                <div class="mb-3">
+                    <label for="qty" class="form-label">Qty</label>
+                    <input type="number" name="qty" class="form-control" id="qty" placeholder="1">
+                </div>
+
+                <input type="submit" id="submit">
+            </div>
+        </form>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script>
+
+$( function() {
+      var availableTags = [...new Set([
+          {% for i in item %}
+              "{{i.name}}",
+          {% endfor %}
+      ])];
+      $( "#items" ).autocomplete({
+        source: availableTags
+      });
+    } );
+
+    $( function() {
+      var availableTags = [...new Set([
+          {% for i in brand %}
+              "{{i.name}}",
+          {% endfor %}
+      ])];
+      $( "#brand" ).autocomplete({
+        source: availableTags
+      });
+    } );
+
+    $( function() {
+      var availableTags = [...new Set([
+          {% for i in vendor %}
+              "{{i.name}}",
+          {% endfor %}
+      ])];
+      $( "#vendor" ).autocomplete({
+        source: availableTags
+      });
+    } );
+
+    $( function() {
+      var availableTags = [...new Set([
+          {% for i in location %}
+              "{{i.name}}",
+          {% endfor %}
+      ])];
+      $( "#item_location" ).autocomplete({
+        source: availableTags
+      });
+    } );
+
+</script>
+{% endblock content %}

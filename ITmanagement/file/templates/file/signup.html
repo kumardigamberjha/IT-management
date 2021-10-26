@@ -1,0 +1,52 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>User Status</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="one-page">
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <h1 class="h3 mb-3 h1">Please Sign Up</h1>
+        <div class="in-one-line">
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="fname" name="first_name" placeholder="First Name">
+                <label for="fname"> First Name</label>
+            </div>
+
+            <div class="form-floating col-md-6">
+                <input type="text" class="form-control" id="lname" name="last_name" placeholder="First Name">
+                <label for="lname"> Last Name</label>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username" name="username" placeholder="First Name">
+            <label for="username"> Username</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Your Email">
+            <label for="floatingInput">Email address</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password1" name="password1" placeholder="Password">
+            <label for="password1">Password</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="Password">
+            <label for="password2">Confirm Password</label>
+        </div>
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+    </form>
+    <div class="error">{{form.errors}}</div>
+</div>
+
+{% endblock content %}
+

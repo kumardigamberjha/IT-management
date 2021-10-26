@@ -1,0 +1,46 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>User Status</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Stock ID</th>
+                <th>Item</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Capacity</th>
+                <th>Version</th>
+                <th>Item Serial No</th>
+                <th>Qty</th>
+                <th>Status</th>
+            </tr>
+            {% for i in data %}
+            {% if i.qty != 0 %}
+
+            <tr>
+                <form action="{% url 'stock_issue_form' i.stock_id %}" method="post">
+                    {% csrf_token %}
+                <td><input type="submit" value="{{i.stock_id}}"></td>
+            </form>
+                <td>{{i.item}}</td>
+                <td>{{i.brand}}</td>
+                <td>{{i.item_model}}</td>
+                <td>{{i.capacity}}</td>
+                <td>{{i.version}}</td>
+                <td>{{i.item_serial_number}}</td>
+                <td>{{i.qty}}</td>
+                <td>{{i.issued}}</td>
+
+            </tr>
+            {% endif %}
+
+            {% endfor %}
+
+        </table>
+
+{% endblock content %}

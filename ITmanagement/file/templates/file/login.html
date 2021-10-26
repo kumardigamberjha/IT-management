@@ -1,0 +1,34 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+    <title>Login</title>
+{% endblock title %}
+
+{% block content %}
+
+   <form action="" method="POST">
+    <h1 class="h1">Please sign in</h1>
+
+      {% csrf_token %}
+  
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" name="username" placeholder="name@example.com">
+        <label for="floatingInput">Username</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+  
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+      
+      <div class="errors text-danger"><p>{{form.errors}}</p></div>
+
+
+      {% for message in messages %}
+      <p>{{message}}</p>
+      {%endfor %}
+
+    </form>
+
+    {% endblock content %}

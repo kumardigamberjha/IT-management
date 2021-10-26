@@ -1,0 +1,89 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>GDPA IT Purchase</title>
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+
+{% endblock style %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+        </div>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                
+                <div class="col-md-3">
+                    Purchase ID Number:- 
+                </div>
+                <div class="col-md-8">
+                    <input type="text" name="purchase" readonly value="{{stock.purchase_id}}">
+                </div>
+                <div class="col-md-3">
+                    Item
+                </div>
+                <div class="col-md-8">
+                    {{stock.req.item}}
+                </div>
+                <div class="col-md-3">
+                    Brand
+                </div>
+                <div class="col-md-8">
+                    {{stock.brand}}
+                </div>
+                <div class="col-md-3">
+                    Total Qty
+                </div>
+                <div class="col-md-8">
+                    <input type="text" name="rec_qty" readonly value="{{stock.rec_qty}}">
+                </div>
+                <div class="col-md-3">
+                    Model
+                </div>
+                <div class="col-md-8">
+                    {{stock.item_model}}
+                </div>
+                <div class="col-md-3">
+                    Capacity
+                </div>
+                <div class="col-md-8">
+                    {{stock.req.capacity}}
+                </div>
+                <div class="col-md-3">
+                    Version
+                </div>
+                <div class="col-md-8">
+                    {{stock.req.version}}
+                </div>
+                <div class="col-md-3">
+                    Serial Number
+                </div>
+                <div class="col-md-8">
+                    {{stock.item_serial_number}}
+                </div>
+        
+                <div class="col-md-3">
+                    To User:- 
+                </div>
+                <div class="col-md-8">
+                    {{form.Users}}
+                </div>
+
+                <div class="col-md-3">
+                Issue Qty:- 
+                </div>
+                <div class="col-md-8">
+                    {{form.issue_qty}}
+                </div>
+            </div> 
+
+            <!-- {{form|crispy}} -->
+            <input type="submit" >
+        </form>
+    </div>
+{% endblock content %}

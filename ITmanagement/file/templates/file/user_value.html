@@ -1,0 +1,41 @@
+{% extends 'app/basic.html' %}
+
+{% block title %}
+    <title>User Status</title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Search assets by username</h1>
+
+    {% if data.O_stock %}
+    <p>{{data.Users.first_name}}</p>
+    
+    <p>{{data.asset_id}}</p>
+    <p>{{data.O_stock.item}}</p>
+    <p>{{data.O_stock.brand}}</p>
+    <p>{{data.O_stock.item_model}}</p>
+    <p>{{data.O_stock.capacity}}</p>
+    <p>{{data.O_stock.item_serial_number}}</p>
+    <p>{{data.O_stock.stock_id}}</p>
+    {% endif %}
+
+    {% if data.purchase %}
+    <p>{{data.asset_id}}</p>
+    <p>{{data.purchase.date_of_purchase}}</p>
+    <p>{{data.purchase.Vendor}}</p>
+    <p>{{data.purchase.item}}</p>
+    <p>{{data.purchase.brand}}</p>
+    <p>{{data.purchase.item_model}}</p>
+    <p>{{data.purchase.capacity}}</p>
+    <p>{{data.purchase.version}}</p>
+    <p>{{data.purchase.item_serial_number}}</p>
+    <p>{{data.purchase.warranty_period}}</p>
+    <p>{{data.purchase.choices}}</p>
+    <p>{{data.location}}</p>
+    <p>{{data.Users.departments}}</p>
+
+    {% endif %}
+<script>
+
+</script>
+{% endblock content %}

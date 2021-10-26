@@ -1,0 +1,103 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>User Status</title>
+{% endblock title %}
+
+{% block style %}
+    <style>
+    .blue{
+        color: blue;
+    }
+    .red{
+        color: red;
+    }
+    .btn{
+        color: blue;
+        font-size: 1.3rem;
+        border: 1px solid blue;
+    }
+</style>
+{% endblock style %}
+
+
+{% block content %}
+
+<div class="container-fluid mt-4">
+    <div class="table-responsive">
+        <table class="table">
+            <tr>
+                <th>Asset ID</th>
+                <th>Date of Purchase</th>
+                <th>Vendor</th>
+                <th>Item</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Capacity</th>
+                <th>Version</th>
+                <th>Item Serial No</th>
+                <th>Warranty Period</th>
+                <th>Item Status</th>
+                <th>Item condition</th>
+                <th>User</th>
+                <th>Date of Issue</th>
+                <th>Qty</th>
+                <th>Origin-ID</th>
+            </tr>
+            {% for i in issued %}
+            <tr>
+                <td class="btn">{{i.asset_id}}</td>
+
+                {% if i.O_stock %}
+                <td class="blue">{{i.date_of_issue}}</td>
+                <td class="blue">{{i.O_stock.Vendor}}</td>
+                <td class="blue">{{i.O_stock.item}}</td>
+                <td class="blue">{{i.O_stock.brand}}</td>
+                <td class="blue">{{i.O_stock.item_model}}</td>
+                <td class="blue">{{i.O_stock.capacity}}</td>
+                <td class="blue">{{i.O_stock.version}}</td>
+                <td class="blue">{{i.O_stock.item_serial_number}}</td>
+                <td class="blue">{{i.purchase.warranty_period}}</td>
+                <td class="blue">{{i.item_status}}</td>
+                <td class="blue">{{i.item_condition}}</td>
+                <td class="blue">{{i.Users.first_name}}</td>
+                <td class="blue">{{i.date_of_issue}}</td>
+                <td class="blue">{{i.O_stock.issue_qty}}</td>
+                <td class="blue">
+                    O-{{i.O_stock.stock_id}}</td>
+                {% endif %}
+
+
+                {% if i.purchase %}
+                <td class="red">{{i.date_of_issue}}</td>
+                <td class="red">{{i.purchase.Vendor}}</td>
+                <td class="red">{{i.purchase.req.item}}</td>
+                <td class="red">{{i.purchase.brand}}</td>
+                <td class="red">{{i.purchase.item_model}}</td>
+                <td class="red">{{i.purchase.req.capacity}}</td>
+                <td class="red">{{i.purchase.req.version}}</td>
+                <td class="red">{{i.purchase.item_serial_number}}</td>
+                <td class="red">{{i.purchase.warranty_period}}</td>
+                <td class="red">{{i.purchase.status}}</td>
+                <td class="red">{{i.item_condition}}</td>
+                <td class="red">{{i.Users.first_name}}</td>
+                <td class="red">{{i.date_of_issue}}</td>
+                <td class="red">{{i.purchase.issue_qty}}</td>
+                <td class="red">
+                    P-{{i.purchase.purchase_id}}
+                </td>
+
+                {% endif %}
+
+                
+
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+
+
+
+        {% endblock content %}

@@ -1,0 +1,145 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>GDPA IT Purchase</title>
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block style %}
+<style>
+    #submit {
+        width: 100%;
+        color: white;
+        background-color: blue;
+        margin: 20px auto;
+        border-radius: 33px;
+        outline: none;
+        padding: 8px;
+    }
+
+    h1 {
+        color: blue;
+        text-align: center;
+        margin: 25px 35px;
+        font-weight: 800;
+    }
+
+    .container .col-md-3,
+    .col-md-8 {
+        padding: 15px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    /*     
+    .container form .col-md-8 input {
+        outline-style: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 3px solid blue;
+        outline: none;
+    } */
+</style>
+{% endblock style %}
+
+
+{% block content %}
+<div class="container">
+    <h1>Item Recieving Form</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+
+            <div class="col-md-3">
+                Purchase_ID
+            </div>
+            <div class="col-md-8">
+                <input type="text" name="pur" readonly class="form-control-plaintext" value="{{data.purchase_id}}">
+                
+            </div>
+
+            <div class="col-md-3">
+                Date Of Purchase
+            </div>
+            <div class="col-md-8">
+                {{data.date_of_purchase}}
+            </div>
+
+            <div class="col-md-3">Item</div>
+            <div class="col-md-8">{{data.req.item}}</div>
+
+            <div class="col-md-3">
+                Brand
+            </div>
+            <div class="col-md-8">
+                {{data.brand}}
+            </div>
+
+            <div class="col-md-3">
+                qty
+            </div>
+            <div class="col-md-8">
+                <input type="number" name="pur_qty" readonly style="border: none;" value="{{data.purchase_qty}}">
+            </div>
+
+            <div class="col-md-3">
+                Vendor
+            </div>
+            <div class="col-md-8">
+                {{data.Vendor}}
+            </div>
+
+            <div class="col-md-3">
+                Warranty Period
+            </div>
+            <div class="col-md-8">
+                {{data.warranty_period}}
+            </div>
+
+            <div class="col-md-3">
+                Item Price
+            </div>
+            <div class="col-md-8">
+                {{data.price}}
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                Recieving Qty.
+            </div>
+            <div class="col-md-8">
+                <input type="text" name="rec_qty" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                Bill No.
+            </div>
+            <div class="col-md-8">
+                <input type="text" name="Bill_No" class="form-control">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                Total Price
+            </div>
+            <div class="col-md-8">
+                <input type="number" name="purchase_price" class="form-control">
+            </div>
+        </div>
+
+        <input type="submit" class="mt-4" id="submit">
+    </form>
+</div>
+
+
+<script>
+
+</script>
+{% endblock content %}

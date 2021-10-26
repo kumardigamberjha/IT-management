@@ -1,0 +1,195 @@
+{% extends 'file/basic.html' %}
+
+{% block title %}
+<title>User Status</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+    #submit {
+        color: green;
+        width: 100%;
+        color: white;
+        background-color: blue;
+        margin: 20px auto;
+        padding: 8px;
+    }
+
+    h1 {
+        color: blue;
+        text-align: center;
+        margin: 25px 35px;
+        font-weight: 800;
+    }
+
+    .ui-menu-item-wrapper {
+        position: relative;
+        display: block;
+        width: 85%;
+        color: black;
+        background-color: skyblue;
+        margin-left: -35px;
+        padding: 10px;
+        background-size: 100% 100vh;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<h1>Search assets by username</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{filter.form}}
+    <label for="user-input">User:</label>
+    <input type="text" name="user" id="user-input">
+    <input type="submit" value="Search">
+</form>
+
+<div class="container-fluid mt-4">
+    <table class="table">
+        <tr>
+            <th>Purchase ID</th>
+            <th>Date of Purchase</th>
+            <th>Vendor</th>
+            <th>Item</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Capacity</th>
+            <th>Version</th>
+            <th>Item Serial No</th>
+            <th>Warranty Period</th>
+            <th>Location</th>
+            <th>User</th>
+            <th>Department</th>
+            <th>OS/PO ID </th>
+        </tr>
+        {% for i in filter.qs %}
+
+
+        <tr>
+            {% if i.O_stock %}
+
+            <td>{{i.asset_id}}</td>
+            <td>{{i.date_of_purchase}}</td>
+            <td>{{i.Vendor}}</td>
+            <td>{{i.O_stock.item}}</td>
+            <td>{{i.O_stock.brand}}</td>
+            <td>{{i.O_stock.item_model}}</td>
+            <td>{{i.O_stock.capacity}}</td>
+            <td>{{i.O_stock.version}}</td>
+            <td>{{i.O_stock.item_serial_number}}</td>
+            <td>{{i.O_stock.warranty_period}}</td>
+            <td>{{i.O_stock.location}}</td>
+            <td>{{i.Users.first_name}}</td>
+            <td>{{i.Users.departments}}</td>
+            <td>OS-{{i.O_stock.stock_id}}</td>
+            {% endif %}
+
+            {% if i.purchase %}
+            <td>{{i.asset_id}}</td>
+            <td>{{i.purchase.date_of_purchase}}</td>
+            <td>{{i.purchase.Vendor}}</td>
+            <td>{{i.purchase.req.item}}</td>
+            <td>{{i.purchase.brand}}</td>
+            <td>{{i.purchase.item_model}}</td>
+            <td>{{i.purchase.req.capacity}}</td>
+            <td>{{i.purchase.req.version}}</td>
+            <td>{{i.purchase.item_serial_number}}</td>
+            <td>{{i.purchase.warranty_period}}</td>
+            <td>{{i.location}}</td>
+            <td>{{i.Users.first_name}}</td>
+            <td>{{i.Users.departments}}</td>
+            <td>P-{{i.purchase.purchase_id}}</td>
+            {% endif %}
+
+            {% endfor %}
+        </tr>
+
+
+
+
+        <!-- Search by name -->
+        {% for i in detail %}
+        {{name}}
+
+            {% if name == i.Users.first_name %}
+        <tr>
+            {% if i.O_stock %}
+
+            <td>{{i.asset_id}}</td>
+            <td>{{i.date_of_purchase}}</td>
+            <td>{{i.Vendor}}</td>
+            <td>{{i.O_stock.item}}</td>
+            <td>{{i.O_stock.brand}}</td>
+            <td>{{i.O_stock.item_model}}</td>
+            <td>{{i.O_stock.capacity}}</td>
+            <td>{{i.O_stock.version}}</td>
+            <td>{{i.O_stock.item_serial_number}}</td>
+            <td>{{i.O_stock.warranty_period}}</td>
+            <td>{{i.O_stock.location}}</td>
+            <td>{{i.Users.first_name}}</td>
+            <td>{{i.Users.departments}}</td>
+            <td>OS-{{i.O_stock.stock_id}}</td>
+            {% endif %}
+
+            {% if i.purchase %}
+            <td>{{i.asset_id}}</td>
+            <td>{{i.purchase.date_of_purchase}}</td>
+            <td>{{i.purchase.Vendor}}</td>
+            <td>{{i.purchase.req.item}}</td>
+            <td>{{i.purchase.brand}}</td>
+            <td>{{i.purchase.item_model}}</td>
+            <td>{{i.purchase.req.capacity}}</td>
+            <td>{{i.purchase.req.version}}</td>
+            <td>{{i.purchase.item_serial_number}}</td>
+            <td>{{i.purchase.warranty_period}}</td>
+            <td>{{i.location}}</td>
+            <td>{{i.Users.first_name}}</td>
+            <td>{{i.Users.departments}}</td>
+            <td>P-{{i.purchase.purchase_id}}</td>
+            {% endif %}
+            {% endif %}
+
+
+            {% endfor %}
+        </tr>
+
+</div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+<!-- jquery ui -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+<script>
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in data %}
+              "{{i.Users.first_name}}",
+        {% endfor %}
+      ])];
+    $("#input-user").autocomplete({
+        source: availableTags
+    });
+    } );
+
+    $(function () {
+        var availableTags = [...new Set([
+            {% for i in all_item %}
+              "{{i.name}}",
+        {% endfor %}
+      ])];
+    $("#input-item").autocomplete({
+        source: availableTags
+    });
+    } );
+
+</script>
+
+{% endblock content %}
